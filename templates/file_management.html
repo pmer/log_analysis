@@ -1,0 +1,38 @@
+{% extends "logged_in.html" %}
+{% block title %}Manage Files{% endblock %}
+{% block body2 %}
+    <h1>Please select and upload a log file</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="upload">File input</label>
+            <input id="upload"
+                   name="log"
+                   type="file"
+                   class="form-control-file
+                         {% if upload_valid == false %}
+                             is-invalid
+                         {% endif %}
+                         ">
+            {% if upload_valid == false %}
+                <div class="invalid-feedback d-block">
+                    {{ upload_feedback }}
+                </div>
+            {% endif %}
+        </div>
+        <button type="submit" class="btn btn-primary" name="add">Add file</button>
+    </form>
+    {% if logs %}
+        <h1 class="mt-5">Remove file</h1>
+        <form method="POST">
+            {% for log in logs %}
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" name="{{ log.id }}">
+                        {{ log.filename }}
+                    </label>
+                </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-danger" name="delete">Delete</button>
+        </form>
+    {% endif %}
+{% endblock %}

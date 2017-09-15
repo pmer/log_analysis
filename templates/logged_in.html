@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block body %}
+    <nav class="navbar navbar-expand navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">App Name</a>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item
+                           {% if page == "file_management" %}
+                               active
+                           {% endif %}
+                           ">
+                    <a class="nav-link" href="/file_management">Manage Files</a>
+                </li>
+                <li class="nav-item
+                           {% if page == "personal_info" %}
+                               active
+                           {% endif %}
+                           ">
+                    <a class="nav-link" href="/personal_info">Personal Info</a>
+                </li>
+                <li class="nav-item
+                           {% if page == "support_center" %}
+                               active
+                           {% endif %}
+                           ">
+                    <a class="nav-link disabled" href="#">Support Center</a>
+                </li>
+            </ul>
+            <span class="mr-4">Welcome back, {{ email }}</span>
+            <a href="/logout">Log out</a>
+        </div>
+    </nav>
+    <div class="container">
+        <main class="py-5">
+            {% block body2 %}{% endblock %}
+        </main>
+    </div>
+{% endblock %}
